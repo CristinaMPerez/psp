@@ -1,16 +1,15 @@
 package com.crismperez.psp.ut02.ex02.remote
 
-import com.crismperez.psp.ut02.ex01.data.remote.ApiEndPoints
 import com.crismperez.psp.ut02.ex01.data.remote.models.UserApiModel
 import com.crismperez.psp.ut02.ex02.remote.models.Alert
 import com.crismperez.psp.ut02.ex02.remote.models.AlertResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitApiClient {
+class RetrofitApiAlert {
 
-    private val urlEndPoint = "https://plagricola.sitehub.es/api/public/"
-    private val apiEndPoint = ApiEndPoint
+    private val urlEndPoint = "https://plagricola.sitehub.es/"
+    private var apiEndPoint : ApiEndPoint
 
     init {
         apiEndPoint = buildApiEndPoint()
@@ -23,11 +22,11 @@ class RetrofitApiClient {
             .build()
     }
 
-    private fun buildApiEndPoint(): ApiEndPoints {
-        return buildClient().create(ApiEndPoints::class.java)
+    private fun buildApiEndPoint(): ApiEndPoint {
+        return buildClient().create(ApiEndPoint::class.java)
     }
 
-    fun getAlerts() : List<AlertResponse>{
+    fun getAlerts(): List<AlertResponse> {
         val callAlert = apiEndPoint.getAlerts()
         val response = callAlert.execute()
 
@@ -39,7 +38,7 @@ class RetrofitApiClient {
         }
     }
 
-    fun getAlert(alertId: Int) : Alert? {
+    /*fun getAlert(alertId: Int) : AlertResponse? {
         val callAlerts = apiEndPoint.getAlert(alertId)
         val response = callAlerts.execute()
         return if(response.isSuccessful){
@@ -47,5 +46,5 @@ class RetrofitApiClient {
         }else{
             null
         }
-    }
+    }*/
 }
